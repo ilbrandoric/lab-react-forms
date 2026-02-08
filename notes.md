@@ -388,66 +388,55 @@ After that line runs:
 ## Application State Diagram
 
 ```mermaid
-graph TD
-    A[App Component State] --> B[students: Array]
-    A --> C[fullName: String]
-    A --> D[image: String]
-    A --> E[phone: String]
-    A --> F[email: String]
-    A --> G[graduated: Boolean]
-    A --> H[program: String]
-    A --> I[graduationYear: Number]
+graph TB
+    A[App Component State]
     
-    B --> B1[Initial: studentsData.json]
-    B --> B2[Updated: via handleSubmit]
+    A --> B[students Array<br/>Initial: studentsData.json<br/>Updated: handleSubmit]
     
-    C --> C1[Initial: empty string]
-    C --> C2[Updated: via handleChange]
+    A --> C[fullName String<br/>Initial: empty<br/>Updated: handleChange]
     
-    D --> D1[Initial: empty string]
-    D --> D2[Updated: via handleChange]
+    A --> D[image String<br/>Initial: empty<br/>Updated: handleChange]
     
-    E --> E1[Initial: empty string]
-    E --> E2[Updated: via handleChange]
+    A --> E[phone String<br/>Initial: empty<br/>Updated: handleChange]
     
-    F --> F1[Initial: empty string]
-    F --> F2[Updated: via handleChange]
+    A --> F[email String<br/>Initial: empty<br/>Updated: handleChange]
     
-    G --> G1[Initial: false]
-    G --> G2[Updated: via handleChange]
+    A --> G[graduated Boolean<br/>Initial: false<br/>Updated: handleChange]
     
-    H --> H1[Initial: empty string]
-    H --> H2[Updated: via handleChange]
+    A --> H[program String<br/>Initial: empty<br/>Updated: handleChange]
     
-    I --> I1[Initial: 2023]
-    I --> I2[Updated: via handleChange]
+    A --> I[graduationYear Number<br/>Initial: 2023<br/>Updated: handleChange]
     
-    style A fill:#4A90E2,color:#fff
-    style B fill:#7ED321,color:#000
-    style C fill:#F5A623,color:#000
-    style D fill:#F5A623,color:#000
-    style E fill:#F5A623,color:#000
-    style F fill:#F5A623,color:#000
-    style G fill:#BD10E0,color:#fff
-    style H fill:#F5A623,color:#000
-    style I fill:#50E3C2,color:#000
+    style A fill:#4A90E2,color:#fff,stroke:#333,stroke-width:3px
+    style B fill:#7ED321,color:#000,stroke:#333,stroke-width:2px
+    style C fill:#F5A623,color:#000,stroke:#333,stroke-width:2px
+    style D fill:#F5A623,color:#000,stroke:#333,stroke-width:2px
+    style E fill:#F5A623,color:#000,stroke:#333,stroke-width:2px
+    style F fill:#F5A623,color:#000,stroke:#333,stroke-width:2px
+    style G fill:#BD10E0,color:#fff,stroke:#333,stroke-width:2px
+    style H fill:#F5A623,color:#000,stroke:#333,stroke-width:2px
+    style I fill:#50E3C2,color:#000,stroke:#333,stroke-width:2px
 ```
+
+> **💡 How to view this diagram:**
+> - **VS Code**: Install the "Markdown Preview Mermaid Support" extension, then open preview (Ctrl+Shift+V or Cmd+Shift+V)
+> - **Online**: Copy the mermaid code and paste it at [https://mermaid.live](https://mermaid.live)
+> - **GitHub/GitLab**: Mermaid diagrams render automatically in markdown files
 
 ---
 
 ## Component Rendering Diagram
 
 ```mermaid
-graph TD
-    A[App.jsx] --> B[Navbar]
-    A --> C[Form - Add Student]
-    A --> D[TableHeader]
-    A --> E[StudentCard List]
+graph TB
+    A[App.jsx]
     
+    A --> B[Navbar Component]
     B --> B1[Logo Image]
     B --> B2[Cohort Tools Text]
     B --> B3[Profile Icon]
     
+    A --> C[Form: Add Student]
     C --> C1[Full Name Input]
     C --> C2[Profile Image Input]
     C --> C3[Phone Input]
@@ -457,6 +446,7 @@ graph TD
     C --> C7[Graduated Checkbox]
     C --> C8[Add Student Button]
     
+    A --> D[TableHeader Component]
     D --> D1[Image Header]
     D --> D2[Name Header]
     D --> D3[Program Header]
@@ -464,23 +454,24 @@ graph TD
     D --> D5[Phone Header]
     D --> D6[Graduated Header]
     
-    E --> E1[StudentCard 1]
-    E --> E2[StudentCard 2]
-    E --> E3[StudentCard ...]
-    E --> E4[StudentCard n]
+    A --> E[StudentCard List<br/>students.map]
+    E --> E1[StudentCard Component 1]
+    E --> E2[StudentCard Component 2]
+    E --> E3[StudentCard Component ...]
+    E --> E4[StudentCard Component n]
     
-    E1 --> SC1[Image + fullName + program + email + phone + graduated]
-    E2 --> SC2[Image + fullName + program + email + phone + graduated]
-    E3 --> SC3[Image + fullName + program + email + phone + graduated]
-    E4 --> SC4[Image + fullName + program + email + phone + graduated]
+    E1 --> SC1[Student Data:<br/>image, fullName, program,<br/>email, phone, graduated]
+    E2 --> SC2[Student Data:<br/>image, fullName, program,<br/>email, phone, graduated]
+    E3 --> SC3[Student Data:<br/>image, fullName, program,<br/>email, phone, graduated]
+    E4 --> SC4[Student Data:<br/>image, fullName, program,<br/>email, phone, graduated]
     
-    style A fill:#4A90E2,color:#fff
-    style B fill:#7ED321,color:#000
-    style C fill:#F5A623,color:#000
-    style D fill:#BD10E0,color:#fff
-    style E fill:#50E3C2,color:#000
-    style E1 fill:#F8E71C,color:#000
-    style E2 fill:#F8E71C,color:#000
-    style E3 fill:#F8E71C,color:#000
-    style E4 fill:#F8E71C,color:#000
+    style A fill:#4A90E2,color:#fff,stroke:#333,stroke-width:3px
+    style B fill:#7ED321,color:#000,stroke:#333,stroke-width:2px
+    style C fill:#F5A623,color:#000,stroke:#333,stroke-width:2px
+    style D fill:#BD10E0,color:#fff,stroke:#333,stroke-width:2px
+    style E fill:#50E3C2,color:#000,stroke:#333,stroke-width:2px
+    style E1 fill:#F8E71C,color:#000,stroke:#333,stroke-width:2px
+    style E2 fill:#F8E71C,color:#000,stroke:#333,stroke-width:2px
+    style E3 fill:#F8E71C,color:#000,stroke:#333,stroke-width:2px
+    style E4 fill:#F8E71C,color:#000,stroke:#333,stroke-width:2px
 ```
