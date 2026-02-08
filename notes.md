@@ -382,3 +382,105 @@ After that line runs:
 ## One-line summary
 
 `handleSubmit` prevents refresh, creates a student object from state, and adds it to the students list.
+
+---
+
+## Application State Diagram
+
+```mermaid
+graph TD
+    A[App Component State] --> B[students: Array]
+    A --> C[fullName: String]
+    A --> D[image: String]
+    A --> E[phone: String]
+    A --> F[email: String]
+    A --> G[graduated: Boolean]
+    A --> H[program: String]
+    A --> I[graduationYear: Number]
+    
+    B --> B1[Initial: studentsData.json]
+    B --> B2[Updated: via handleSubmit]
+    
+    C --> C1[Initial: empty string]
+    C --> C2[Updated: via handleChange]
+    
+    D --> D1[Initial: empty string]
+    D --> D2[Updated: via handleChange]
+    
+    E --> E1[Initial: empty string]
+    E --> E2[Updated: via handleChange]
+    
+    F --> F1[Initial: empty string]
+    F --> F2[Updated: via handleChange]
+    
+    G --> G1[Initial: false]
+    G --> G2[Updated: via handleChange]
+    
+    H --> H1[Initial: empty string]
+    H --> H2[Updated: via handleChange]
+    
+    I --> I1[Initial: 2023]
+    I --> I2[Updated: via handleChange]
+    
+    style A fill:#4A90E2,color:#fff
+    style B fill:#7ED321,color:#000
+    style C fill:#F5A623,color:#000
+    style D fill:#F5A623,color:#000
+    style E fill:#F5A623,color:#000
+    style F fill:#F5A623,color:#000
+    style G fill:#BD10E0,color:#fff
+    style H fill:#F5A623,color:#000
+    style I fill:#50E3C2,color:#000
+```
+
+---
+
+## Component Rendering Diagram
+
+```mermaid
+graph TD
+    A[App.jsx] --> B[Navbar]
+    A --> C[Form - Add Student]
+    A --> D[TableHeader]
+    A --> E[StudentCard List]
+    
+    B --> B1[Logo Image]
+    B --> B2[Cohort Tools Text]
+    B --> B3[Profile Icon]
+    
+    C --> C1[Full Name Input]
+    C --> C2[Profile Image Input]
+    C --> C3[Phone Input]
+    C --> C4[Email Input]
+    C --> C5[Program Select]
+    C --> C6[Graduation Year Input]
+    C --> C7[Graduated Checkbox]
+    C --> C8[Add Student Button]
+    
+    D --> D1[Image Header]
+    D --> D2[Name Header]
+    D --> D3[Program Header]
+    D --> D4[Email Header]
+    D --> D5[Phone Header]
+    D --> D6[Graduated Header]
+    
+    E --> E1[StudentCard 1]
+    E --> E2[StudentCard 2]
+    E --> E3[StudentCard ...]
+    E --> E4[StudentCard n]
+    
+    E1 --> SC1[Image + fullName + program + email + phone + graduated]
+    E2 --> SC2[Image + fullName + program + email + phone + graduated]
+    E3 --> SC3[Image + fullName + program + email + phone + graduated]
+    E4 --> SC4[Image + fullName + program + email + phone + graduated]
+    
+    style A fill:#4A90E2,color:#fff
+    style B fill:#7ED321,color:#000
+    style C fill:#F5A623,color:#000
+    style D fill:#BD10E0,color:#fff
+    style E fill:#50E3C2,color:#000
+    style E1 fill:#F8E71C,color:#000
+    style E2 fill:#F8E71C,color:#000
+    style E3 fill:#F8E71C,color:#000
+    style E4 fill:#F8E71C,color:#000
+```
