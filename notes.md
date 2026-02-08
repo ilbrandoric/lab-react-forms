@@ -6,22 +6,19 @@
 npm install
 npm run dev
 ```
-
 ---
 
-## Capture Data
+## Capture data
 
-### Single Handler for All Changes
+### Single handler for all changes
 
-**Big picture (one sentence):**
+Big picture (one sentence)
 
-One function listens to all inputs and decides which piece of state to update by reading the input’s `name`.
+One function listens to all inputs and decides which piece of state to update by reading the input’s name.
 
 That’s it.
 
----
-
-## App.jsx Structure
+## App.jsx structure:
 
 ```jsx
 <label>
@@ -45,9 +42,7 @@ That’s it.
 </label>
 ```
 
----
-
-## **SINGLE** Handler for **ALL** Changes
+## **SINGLE** handler for **ALL** changes:
 
 ```js
 const handleChange = (e) => {
@@ -74,18 +69,30 @@ const handleChange = (e) => {
 };
 ```
 
----
+Line-by-line, in plain English
 
-## Line-by-Line Explanation (Plain English)
+### 1️⃣ This function runs every time any input changes
 
-### 1️⃣ This function runs every time **any input changes**
+User types:
 
-When the user:
-- types into **Full Name**
-- clicks the **Graduated** checkbox
-- selects a **Program**
+Full Name  
+```jsx
+<input
+  name="fullName"
+  type="text"
+/>
+```
 
-➡️ React calls `handleChange`.
+User clicks checkbox:
+
+Graduated  
+```jsx
+<input name="graduated" type="checkbox" />
+```
+
+User selects option  
+
+➡️ React calls `handleChange`
 
 ---
 
@@ -95,11 +102,10 @@ When the user:
 const { name, value, type, checked } = e.target;
 ```
 
-Think of `e.target` as:
+Think of `e.target` as:  
+**“The input that was just touched”**
 
-> **“The input that was just touched.”**
-
-Example input:
+`e.target` is the exact HTML element that triggered the event.
 
 ```jsx
 <input
@@ -110,32 +116,48 @@ Example input:
 />
 ```
 
-Internally:
-
 ```js
 e = {
   target: <input ... />
 }
 ```
 
-So:
+`e.target ===` the input element the user just interacted with.
 
-- `name` → which input is this?
-- `value` → what did the user type or select?
+From it we read:
+
+- `name` → which input is this? (for example: phone number)
+- `value` → what did the user type/select?
 - `type` → what kind of input is it?
-- `checked` → true / false (checkbox only)
+- `checked` → true / false (only for checkboxes)
 
-This line:
+So when you write:
 
 ```js
 const { name, value } = e.target;
 ```
 
-is the same as:
+You’re literally reading attributes and state of that input.
+
+---
+
+## How to read this in human terms
+
+```js
+const { name, value, type, checked } = e.target;
+```
+
+Read as:
+
+From `e.target`, create constants called `name`, `value`, `type`, and `checked` using the values from the input.
+
+Equivalent to:
 
 ```js
 const name = e.target.name;
 const value = e.target.value;
+const type = e.target.type;
+const checked = e.target.checked;
 ```
 
 ---
@@ -150,17 +172,19 @@ if (type === "checkbox") {
 ```
 
 Why?
-- Checkboxes do **not** use `value`
-- They use `checked` (`true` or `false`)
+
+- Checkboxes don’t use `value`
+- They use `checked` (`true / false`)
 
 So:
+
 - If the changed input is a checkbox
 - Update `graduated`
-- Stop the function
+- Stop the function (`return`)
 
 ---
 
-### 4️⃣ For everything else, look at the `name`
+### 4️⃣ For everything else, look at the name
 
 ```js
 if (name === "fullName") {
@@ -170,7 +194,7 @@ if (name === "fullName") {
 
 Translation:
 
-> “If the input that changed is the full name field, update the `fullName` state with what the user typed.”
+“If the input that changed is the full name field, update the `fullName` state with what the user typed.”
 
 ---
 
@@ -182,9 +206,10 @@ else if (name === "image") {
 }
 ```
 
-> “If the input is the image field, update the image state.”
+“If the input is the image field, update the image state.”
 
-Same pattern:
+Same pattern repeats:
+
 - input `name`
 - matching `setState`
 
@@ -199,28 +224,29 @@ else if (name === "graduationYear") {
 ```
 
 Why?
-- User types `2025`
-- Browser gives `"2025"` (string)
-- We convert it to `2025` (number)
+
+User types `2025`  
+Browser gives `"2025"` (string)  
+You convert it to `2025` (number)
 
 ---
 
-## Final Takeaway (Write This Down)
+## Final takeaway (write this down)
 
 Inputs identify themselves using **`name`**.  
 `handleChange` reads that name and updates the matching state.
 
 ---
 
-## Submit Data
+## Submit data
 
-### Big picture (one sentence)
+Big picture (one sentence)
 
 When the form is submitted, we stop the page from reloading, bundle up the form data, and add it to the list of students.
 
 ---
 
-## Line-by-Line Explanation
+Line-by-line explanation
 
 ### 1️⃣ This function runs when the form is submitted
 
@@ -239,9 +265,9 @@ const handleSubmit = (e) => {
   };
 ```
 
-- User clicks **Add Student**
-- Browser submits the form
-- React calls `handleSubmit`
+The user clicks “Add Student”  
+The browser says: “A form was submitted”  
+React calls `handleSubmit`
 
 ---
 
@@ -252,12 +278,13 @@ e.preventDefault();
 ```
 
 Normally, submitting a form:
+
 - reloads the page
 - wipes your data
 
 This line says:
 
-> “Don’t do that. Stay on this page.”
+“Don’t do that. Stay on this page.”
 
 ---
 
@@ -275,11 +302,11 @@ const newStudent = {
 };
 ```
 
-Meaning:
+This means:
 
-> “Take everything the user typed (already stored in state) and group it into one object.”
+“Take everything the user typed (which is already stored in state) and group it into one object.”
 
-Example result:
+So `newStudent` becomes something like:
 
 ```js
 {
@@ -294,43 +321,64 @@ Example result:
 ```
 
 No guessing.  
-No reading from the DOM.  
+No reading from the screen.  
 Just using state.
 
----
-
-### 4️⃣ Add the new student to the list
+So…
 
 ```js
-setStudents([...students, newStudent]);
+const handleSubmit = (e) => {
+  e.preventDefault(); // Stops browser from refreshing page
+
+  // Creates a newStudent object from the info the user typed in
+  const newStudent = {
+    fullName,
+    image,
+    phone,
+    email,
+    program,
+    graduationYear,
+    graduated,
+  };
+
+  // Creates a new array by copying students and appending newStudent
+  setStudents([...students, newStudent]);
+};
 ```
 
-This means:
+Think of it like this:
 
-> “Copy the existing students array and append the new student.”
+```js
+[...students, newStudent]
+```
 
-After this:
-- the old array is discarded
+means:
+
+“Take whatever `students` is right now, copy its items into a new array, then add one more item.”
+
+After that line runs:
+
+- the old array is forgotten
 - the new array becomes `students`
 
 ---
 
-### 5️⃣ React then
+### 4️⃣ React then
 
 - re-renders the UI
 - shows the new student in the table
 
 ---
 
-## Why This Is the Correct React Way
+## Why this is the correct React way
 
 - Inputs update state as the user types
-- Submit reads from state
+- Submit just uses state
 - No direct DOM access
 - Predictable, clean, testable
 
 ---
 
-## One-Line Summary
+## One-line summary
 
 `handleSubmit` prevents refresh, creates a student object from state, and adds it to the students list.
